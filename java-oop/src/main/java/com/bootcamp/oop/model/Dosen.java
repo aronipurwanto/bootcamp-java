@@ -21,6 +21,12 @@ public class Dosen extends Orang{
         this.nip = nip;
     }
 
+    public Dosen(int nik, String nama, String tptLahir, LocalDate tglLahir, String jk, Alamat alamat, String title, String nip) {
+        super(nik, nama, tptLahir, tglLahir, jk, alamat);
+        this.title = title;
+        this.nip = nip;
+    }
+
     public String getTitle() {
         return title;
     }

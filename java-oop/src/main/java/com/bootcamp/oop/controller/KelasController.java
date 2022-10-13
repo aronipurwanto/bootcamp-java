@@ -42,6 +42,8 @@ public class KelasController {
                         "TI-122","TI",2022)
         );
         Dosen dosen2 = new Dosen(4322,"Ahmad","Ciamis", LocalDate.of(1990,12,2), "Pria","S.Kom","D-4321");
+        dosen2.setAlamat(new Alamat(3,"Jl. Jalan","Nama Desa","Nama Kecamatan","Nama Kabuputane","Nama Propinsi"));
+
         Matakuliah matakuliah2 = new Matakuliah("MK-002","Pemrograman Database",3);
         Kelas kelas2 = new Kelas("K-002", matakuliah2, dosen2, "Selasa","19.00 - 21.00", mahasiswaList2);
         result.add(kelas2);
