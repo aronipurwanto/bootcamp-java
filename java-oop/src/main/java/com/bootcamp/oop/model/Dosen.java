@@ -1,5 +1,7 @@
 package com.bootcamp.oop.model;
 
+import java.time.LocalDate;
+
 public class Dosen extends Orang{
     private String title;
     private String nip;
@@ -9,6 +11,12 @@ public class Dosen extends Orang{
 
     public Dosen(int nik, String nama, String jk, String title, String nip) {
         super(nik, nama, jk);
+        this.title = title;
+        this.nip = nip;
+    }
+
+    public Dosen(int nik, String nama, String tptLahir, LocalDate tglLahir, String jk, String title, String nip) {
+        super(nik, nama, tptLahir, tglLahir, jk);
         this.title = title;
         this.nip = nip;
     }

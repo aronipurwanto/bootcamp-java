@@ -8,6 +8,18 @@ public class Alamat {
     private String kabupaten;
     private String provinsi;
 
+    public Alamat() {
+    }
+
+    public Alamat(int id, String jalan, String desa, String kecamatan, String kabupaten, String provinsi) {
+        this.id = id;
+        this.jalan = jalan;
+        this.desa = desa;
+        this.kecamatan = kecamatan;
+        this.kabupaten = kabupaten;
+        this.provinsi = provinsi;
+    }
+
     public int getId() {
         return id;
     }
