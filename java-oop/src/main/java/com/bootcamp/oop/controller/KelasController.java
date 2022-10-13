@@ -27,11 +27,15 @@ public class KelasController {
                 new Mahasiswa(125,"Rina","Wanita","TI-122","TI",2022)
         );
 
+        // kelas 1
         Matakuliah matakuliah = new Matakuliah("MK-001","Pemrograman Java",3);
-
         Kelas kelas1 = new Kelas("K-001", matakuliah, dosen, "Senin","19.00 - 21.00", mahasiswaList);
-
         result.add(kelas1);
+
+        // kelas 2
+        Matakuliah matakuliah2 = new Matakuliah("MK-002","Pemrograman Database",3);
+        Kelas kelas2 = new Kelas("K-002", matakuliah2, dosen, "Selasa","19.00 - 21.00", mahasiswaList);
+        result.add(kelas2);
 
         return ResponseEntity.ok()
                 .body(result);
