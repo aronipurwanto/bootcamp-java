@@ -27,6 +27,7 @@ public class SiswaServiceImpl implements SiswaService{
         if(result.isEmpty()){
             Collections.emptyList();
         }
+        // conver dari List<SiswaEntity> => List<SiswaModel>
         return result.stream().map(SiswaModel::new).collect(Collectors.toList());
     }
 
@@ -37,6 +38,7 @@ public class SiswaServiceImpl implements SiswaService{
             return new SiswaModel();
         }
         Optional<SiswaEntity> result = repository.findById(id);
+        // convert dari SiswaEntity => SiswaModel
         return result.map(SiswaModel::new).orElseGet(SiswaModel::new);
     }
 
@@ -47,6 +49,7 @@ public class SiswaServiceImpl implements SiswaService{
         }
         SiswaEntity result= new SiswaEntity(data);
         try{
+            // proses simpan data => table siswa
             this.repository.save(result);
             return new SiswaModel(result);
         }catch (Exception e){
