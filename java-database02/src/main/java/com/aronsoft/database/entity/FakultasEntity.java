@@ -1,11 +1,14 @@
 package com.aronsoft.database.entity;
 
+import com.aronsoft.database.model.FakultasModel;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.BeanUtils;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Set;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -39,4 +42,14 @@ public class FakultasEntity {
 
     @OneToMany(mappedBy = "fakultas", fetch = FetchType.EAGER)
     private Set<JurusanEntity> jurusans;
+
+    public FakultasEntity() {
+    }
+
+    public FakultasEntity(FakultasModel model) {
+        BeanUtils.copyProperties(model, this);
+        this.createdAt=LocalDateTime.now();
+        this.createdBy="SYSTEM";
+        this.id = UUID.randomUUID().toString();
+    }
 }
