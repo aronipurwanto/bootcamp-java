@@ -1,24 +1,24 @@
 package com.aronsoft.database.model;
 
-import com.aronsoft.database.entity.SiswaEntity;
+import com.aronsoft.database.entity.MahasiswaEntity;
 
-public class SiswaModel {
+public class MahasiswaModel {
     private String id;
     private String name;
     private String jk;
     private String alamat;
 
-    public SiswaModel() {
+    public MahasiswaModel() {
     }
 
-    public SiswaModel(SiswaEntity data) {
+    public MahasiswaModel(MahasiswaEntity data) {
         this.id = data.getId();
         this.name = data.getName();
         this.jk = data.getJk();
         this.alamat = data.getAlamat();
     }
 
-    public SiswaModel(String id, String name, String jk, String alamat) {
+    public MahasiswaModel(String id, String name, String jk, String alamat) {
         this.id = id;
         this.name = name;
         this.jk = jk;
