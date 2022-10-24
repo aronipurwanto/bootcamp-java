@@ -46,6 +46,10 @@ public class FakultasEntity {
     public FakultasEntity() {
     }
 
+    public FakultasEntity(String id) {
+        this.id = id;
+    }
+
     public FakultasEntity(FakultasModel model) {
         BeanUtils.copyProperties(model, this);
         this.createdAt=LocalDateTime.now();

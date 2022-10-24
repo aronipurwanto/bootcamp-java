@@ -3,6 +3,7 @@ package com.aronsoft.database.service;
 import com.aronsoft.database.entity.FakultasEntity;
 import com.aronsoft.database.model.FakultasModel;
 import com.aronsoft.database.repository.FakultasRepo;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,7 +47,20 @@ public class FakultasServiceImpl implements FakultasService{
 
     @Override
     public Optional<FakultasModel> update(String id, FakultasModel request) {
-        return Optional.empty();
+        Optional<FakultasEntity> result = this.repo.findById(id);
+        if(result.isEmpty()) {
+            return Optional.empty();
+        }
+
+        FakultasEntity data = result.get();
+        BeanUtils.copyProperties(request,data);
+        data.setId(id);
+        try{
+            this.repo.save(data);
+            return Optional.of(new FakultasModel(data));
+        }catch (Exception e){
+            return Optional.empty();
+        }
     }
 
     @Override
