@@ -1,14 +1,18 @@
 package com.aronsoft.database.entity;
 
 import com.aronsoft.database.model.MahasiswaModel;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+@Getter
+@Setter
 @Entity
-@Table(name = "siswa_tab")
+@Table(name = "mahasiswa_tab")
 public class MahasiswaEntity {
     @Id
     @Column(name = "id", length = 36)
@@ -32,7 +36,7 @@ public class MahasiswaEntity {
     @Column(name = "agama", length = 20)
     private String agama;
 
-    @Column(name = "jurusan_id", length = 36)
+    @Column(name = "jurusan_id", length = 36, insertable = false, updatable = false)
     private String jurusanId;
 
     @Column(name = "created_at")
@@ -46,6 +50,10 @@ public class MahasiswaEntity {
 
     @Column(name = "updated_by", length = 20)
     private String updatedBy;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "jurusan_id", nullable = false)
+    private JurusanEntity jurusan;
 
     public MahasiswaEntity() {
 

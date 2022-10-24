@@ -36,7 +36,7 @@ public class JurusanEntity {
     @Column(name = "updated_by", length = 20)
     private String updatedBy;
 
-    @ManyToOne
-    @JoinColumn(name = "fakultas_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "fakultas_id", nullable = false)
     private FakultasEntity fakultas;
 }
