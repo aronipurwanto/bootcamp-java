@@ -46,6 +46,10 @@ public class JurusanEntity {
     public JurusanEntity() {
     }
 
+    public JurusanEntity(String id) {
+        this.id = id;
+    }
+
     public JurusanEntity(JurusanModel model) {
         this.code = model.getCode();
         this.name = model.getName();

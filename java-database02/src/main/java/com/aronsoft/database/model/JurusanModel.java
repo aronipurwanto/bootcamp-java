@@ -20,7 +20,9 @@ public class JurusanModel {
 
     public JurusanModel(JurusanEntity entity) {
         BeanUtils.copyProperties(entity, this);
-        fakultasId = entity.getFakultas().getId();
-        fakultas = new FakultasModel(entity.getFakultas());
+        if(entity.getFakultas() != null) {
+            fakultasId = entity.getFakultas().getId();
+            fakultas = new FakultasModel(entity.getFakultas());
+        }
     }
 }
