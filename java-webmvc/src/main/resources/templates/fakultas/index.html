@@ -23,9 +23,9 @@
         <td th:text="${data.name}"></td>
         <td th:text="${data.alamat}"></td>
         <td>
-          <a href="">Detail</a> &nbsp;
-          <a href="">Edit</a> &nbsp;
-          <a href="">Delete</a>
+          <a th:href="@{~/fakultas/detail/{id}(id=${data.id})}">Detail</a> &nbsp;
+          <a th:href="@{~/fakultas/edit/{id}(id=${data.id})}">Edit</a> &nbsp;
+          <a th:href="@{~/fakultas/delete/{id}(id=${data.id})}">Delete</a> &nbsp;
         </td>
       </tr>
     </tbody>
