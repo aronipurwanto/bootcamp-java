@@ -1,8 +1,13 @@
-package com.aronsoft.database.entity;
+package com.aronsoft.webmvc.entity;
+
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "ruang_tab")
 public class RuangEntity {

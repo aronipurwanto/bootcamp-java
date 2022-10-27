@@ -1,30 +1,34 @@
-package com.aronsoft.database.entity;
+package com.aronsoft.webmvc.entity;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @Entity
-@Table(name = "gedung_tab")
-public class GedungEntity {
+@Table(name = "mata_kuliah_tab")
+public class MataKuliahEntity {
     @Id
     @Column(name = "id", length = 36)
     private String id;
 
-    @Column(name = "kode_gedung", length = 20, unique = true)
+    @Column(name = "kode_matkul", length = 20, unique = true)
     private String code;
 
-    @Column(name = "nama_gedung", length = 225)
+    @Column(name = "nama_matkul", length = 225)
     private String name;
 
-    @Column(name = "jml_lantai")
-    private Integer jmlLantai;
+    @Column(name = "sks")
+    private Integer sks;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -37,7 +41,4 @@ public class GedungEntity {
 
     @Column(name = "updated_by", length = 20)
     private String updatedBy;
-
-    @OneToMany(mappedBy = "gedung", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<RuangEntity> ruangan = new HashSet<>();
 }

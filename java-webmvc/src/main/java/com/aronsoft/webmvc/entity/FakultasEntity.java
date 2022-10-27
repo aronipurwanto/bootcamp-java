@@ -1,6 +1,6 @@
-package com.aronsoft.database.entity;
+package com.aronsoft.webmvc.entity;
 
-import com.aronsoft.database.model.FakultasModel;
+import com.aronsoft.webmvc.model.FakultasModel;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.BeanUtils;

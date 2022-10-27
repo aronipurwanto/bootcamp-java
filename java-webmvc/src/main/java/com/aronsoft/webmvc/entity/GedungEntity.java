@@ -1,4 +1,4 @@
-package com.aronsoft.database.entity;
+package com.aronsoft.webmvc.entity;
 
 import lombok.Getter;
 import lombok.Setter;

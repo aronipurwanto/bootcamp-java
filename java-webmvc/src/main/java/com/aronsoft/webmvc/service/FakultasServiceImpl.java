@@ -1,9 +1,8 @@
-package com.aronsoft.database.service;
+package com.aronsoft.webmvc.service;
 
-import com.aronsoft.database.entity.FakultasEntity;
-import com.aronsoft.database.entity.JurusanEntity;
-import com.aronsoft.database.model.FakultasModel;
-import com.aronsoft.database.repository.FakultasRepo;
+import com.aronsoft.webmvc.entity.FakultasEntity;
+import com.aronsoft.webmvc.model.FakultasModel;
+import com.aronsoft.webmvc.repository.FakultasRepo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +12,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class FakultasServiceImpl implements FakultasService{
+public class FakultasServiceImpl implements FakultasService {
     private FakultasRepo repo;
 
     @Autowired
@@ -72,11 +71,6 @@ public class FakultasServiceImpl implements FakultasService{
         }
 
         if(!fakultas.getJurusans().isEmpty()){
-            /*
-            for (JurusanEntity jurusan: fakultas.getJurusans()){
-                fakultas.removeJurusan(jurusan);
-            }
-             */
             fakultas.getJurusans().clear();
             try{
                 this.repo.save(fakultas);
