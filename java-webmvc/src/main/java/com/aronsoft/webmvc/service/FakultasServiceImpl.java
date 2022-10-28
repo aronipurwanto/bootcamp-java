@@ -3,6 +3,7 @@ package com.aronsoft.webmvc.service;
 import com.aronsoft.webmvc.entity.FakultasEntity;
 import com.aronsoft.webmvc.model.FakultasModel;
 import com.aronsoft.webmvc.repository.FakultasRepo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class FakultasServiceImpl implements FakultasService {
     private FakultasRepo repo;
@@ -72,11 +74,11 @@ public class FakultasServiceImpl implements FakultasService {
 
         if(!fakultas.getJurusans().isEmpty()){
             fakultas.getJurusans().clear();
-            try{
-                this.repo.save(fakultas);
-            }catch (Exception e){
-
-            }
+        }
+        try{
+            this.repo.save(fakultas);
+        }catch (Exception e){
+            log.info("Delete is failed, error: {}", e.getMessage());
         }
         return Optional.of(new FakultasModel(fakultas));
     }

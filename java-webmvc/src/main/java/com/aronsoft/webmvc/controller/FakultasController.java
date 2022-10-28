@@ -9,8 +9,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/fakultas")
@@ -26,7 +29,12 @@ public class FakultasController {
     public ModelAndView index(){
         ModelAndView view = new ModelAndView("fakultas/index.html");
         List<FakultasModel> result = service.get();
+
+        String[] array = new String[]{"B$u$i$ld", "$t$$h$e", "N$e$x$t", "E$$ra", "$$o$f$", "S$$of$t$wa$r$e", "De$$ve$l$op$me$n$t"};
+        String word = Arrays.asList(array).stream().map(x -> x.replace("$","").toUpperCase(Locale.ROOT))
+                .collect(Collectors.joining(" "));
         view.addObject("dataList", result);
+        view.addObject("word", word);
         return view;
     }
 

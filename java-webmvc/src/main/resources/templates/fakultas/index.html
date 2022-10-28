@@ -25,7 +25,7 @@
         <td>
           <a th:href="@{~/fakultas/detail/{id}(id=${data.id})}">Detail</a> &nbsp;
           <a th:href="@{~/fakultas/edit/{id}(id=${data.id})}">Edit</a> &nbsp;
-          <a th:href="@{~/fakultas/delete/{id}(id=${data.id})}">Delete</a> &nbsp;
+          <a th:href="@{~/fakultas/delete/{id}(id=${data.id})}" onclick="return confirm('Kamu yakin akan delete akuuuuh?')">Delete</a> &nbsp;
         </td>
       </tr>
     </tbody>
