@@ -28,7 +28,7 @@
 <div class="wrapper">
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+    <img class="animation__shake" th:src="@{~/dist/img/luffy.gif}" alt="AdminLTELogo" height="400">
   </div>
 
   <!-- Navbar -->
@@ -106,5 +106,8 @@
 <script th:src="@{~/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js}"></script>
 <!-- AdminLTE App -->
 <script th:src="@{~/dist/js/adminlte.js}"></script>
+
+<!-- script tambahan -->
+<script layout:fragment="client-script"></script>
 </body>
 </html>
