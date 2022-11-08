@@ -1,6 +1,5 @@
 package com.aronsoft.webmvc.model;
 
-import com.aronsoft.webmvc.entity.FakultasEntity;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.BeanUtils;

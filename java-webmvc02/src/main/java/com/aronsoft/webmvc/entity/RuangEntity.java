@@ -1,15 +1,22 @@
 package com.aronsoft.webmvc.entity;
 
+import com.aronsoft.webmvc.model.RuangModel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.beans.BeanUtils;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "ruang_tab")
+@NoArgsConstructor
+@AllArgsConstructor
 public class RuangEntity {
     @Id
     @Column(name = "id", length = 36)
@@ -42,4 +49,16 @@ public class RuangEntity {
     @ManyToOne
     @JoinColumn(name = "gedung_id", nullable = false)
     private GedungEntity gedung;
+
+    public RuangEntity(RuangModel model) {
+        BeanUtils.copyProperties(model,this);
+        // set gedung
+        this.gedung = new GedungEntity(model.getGedungId());
+
+        this.id = UUID.randomUUID().toString();
+        this.createdAt = LocalDateTime.now();
+        this.createdBy = "SYSTEM";
+        this.updatedAt = LocalDateTime.now();
+        this.updatedBy = "SYSTEM";
+    }
 }

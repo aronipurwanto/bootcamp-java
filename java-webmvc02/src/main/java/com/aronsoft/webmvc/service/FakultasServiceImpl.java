@@ -67,19 +67,19 @@ public class FakultasServiceImpl implements FakultasService {
 
     @Override
     public Optional<FakultasModel> delete(String id) {
-        FakultasEntity fakultas = this.repo.findById(id).orElse(null);
-        if(fakultas == null) {
+        FakultasEntity result = this.repo.findById(id).orElse(null);
+        if(result == null) {
             return Optional.empty();
         }
 
-        if(!fakultas.getJurusans().isEmpty()){
-            fakultas.getJurusans().clear();
+        if(!result.getJurusans().isEmpty()){
+            result.getJurusans().clear();
         }
         try{
-            this.repo.save(fakultas);
+            this.repo.save(result);
         }catch (Exception e){
             log.info("Delete is failed, error: {}", e.getMessage());
         }
-        return Optional.of(new FakultasModel(fakultas));
+        return Optional.of(new FakultasModel(result));
     }
 }

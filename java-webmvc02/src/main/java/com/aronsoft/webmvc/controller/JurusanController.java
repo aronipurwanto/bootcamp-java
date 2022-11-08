@@ -1,23 +1,18 @@
 package com.aronsoft.webmvc.controller;
 
 import com.aronsoft.webmvc.model.JurusanModel;
-import com.aronsoft.webmvc.service.FakultasService;
 import com.aronsoft.webmvc.service.JurusanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/jurusan")
 public class JurusanController {
     private JurusanService service;
-    private FakultasService fakultasService;
 
     @Autowired
     public JurusanController(JurusanService service) {
@@ -34,9 +29,7 @@ public class JurusanController {
 
     @GetMapping("/add")
     public ModelAndView add(){
-        ModelAndView view = new ModelAndView("jurusan/add.html");
-        view.addObject("fakultasList", fakultasService.get());
-        return view;
+        return new ModelAndView("jurusan/add.html");
     }
 
     @PostMapping("/save")
@@ -54,7 +47,6 @@ public class JurusanController {
 
         ModelAndView view = new ModelAndView("jurusan/edit.html");
         view.addObject("data", Jurusan);
-        view.addObject("fakultasList", fakultasService.get());
         return view;
     }
 
@@ -73,7 +65,6 @@ public class JurusanController {
 
         ModelAndView view = new ModelAndView("jurusan/detail.html");
         view.addObject("data", Jurusan);
-        view.addObject("fakultasList", fakultasService.get());
         return view;
     }
 }

@@ -1,15 +1,17 @@
 package com.aronsoft.webmvc.entity;
 
+import com.aronsoft.webmvc.model.MataKuliahModel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.BeanUtils;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -41,4 +43,13 @@ public class MataKuliahEntity {
 
     @Column(name = "updated_by", length = 20)
     private String updatedBy;
+
+    public MataKuliahEntity(MataKuliahModel model) {
+        BeanUtils.copyProperties(model, this);
+        this.id = UUID.randomUUID().toString();
+        this.createdAt = LocalDateTime.now();
+        this.createdBy = "SYSTEM";
+        this.updatedAt = LocalDateTime.now();
+        this.updatedBy = "SYSTEM";
+    }
 }

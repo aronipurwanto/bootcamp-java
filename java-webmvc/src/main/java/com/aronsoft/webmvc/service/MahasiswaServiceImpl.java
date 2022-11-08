@@ -22,7 +22,7 @@ public class MahasiswaServiceImpl implements MahasiswaService {
     }
 
     @Override
-    public List<MahasiswaModel> getAll() {
+    public List<MahasiswaModel> get() {
         List<MahasiswaEntity> result = this.repository.findAll();
         if(result.isEmpty()){
             Collections.emptyList();

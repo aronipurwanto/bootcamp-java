@@ -1,7 +1,5 @@
 package com.aronsoft.webmvc.config;
 
-import com.aronsoft.webmvc.entity.FakultasEntity;
-import com.aronsoft.webmvc.entity.JurusanEntity;
 import com.aronsoft.webmvc.repository.FakultasRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
