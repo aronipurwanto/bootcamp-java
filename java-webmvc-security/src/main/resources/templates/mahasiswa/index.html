@@ -8,12 +8,12 @@
 <body>
   <div class="row mb-2" layout:fragment="breadcrumb">
     <div class="col-sm-6">
-      <h1 class="m-0">Fakultas</h1>
+      <h1 class="m-0">Jurusan</h1>
     </div><!-- /.col -->
     <div class="col-sm-6">
       <ol class="breadcrumb float-sm-right">
         <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item active">Fakultas</li>
+        <li class="breadcrumb-item active">Jurusan</li>
       </ol>
     </div><!-- /.col -->
   </div><!-- /.row -->
@@ -24,7 +24,7 @@
       <div class="card">
         <!-- header -->
         <div class="card-header bg-success">
-          <h3 class="card-title">Fakultas</h3>
+          <h3 class="card-title">Jurusan</h3>
 
           <!--- header tools -->
           <div class="card-tools">
@@ -35,12 +35,9 @@
                 <button type="submit" class="btn btn-default">
                   <i class="fas fa-search"></i>
                 </button>
-                <a th:href="@{~/fakultas/add}" class="btn btn-primary">
+                <a th:href="@{~/mahasiswa/add}" id="btn-add" class="btn btn-primary">
                   <i class="fas fa-plus"></i>
                 </a>
-                <button type="button" id="btn-coba" class="btn btn-success">
-                  <i class="fas fa-eye"></i>
-                </button>
               </div>
             </div>
           </div>
@@ -49,11 +46,11 @@
         <!-- header end -->
 
         <div class="card-body">
-          <table id="table-data" class="table">
+          <table class="table">
             <thead>
               <tr>
                 <td>Kode</td>
-                <td>Nama Fakultas</td>
+                <td>Nama Jurusan</td>
                 <td>Alamat</td>
                 <td>#Action</td>
               </tr>
@@ -64,13 +61,13 @@
                 <td th:text="${data.name}"></td>
                 <td th:text="${data.alamat}"></td>
                 <td>
-                  <a th:href="@{~/fakultas/detail/{id}(id=${data.id})}" class="btn btn-xs btn-info">
+                  <a th:href="@{~/jurusan/detail/{id}(id=${data.id})}" class="btn btn-xs btn-info">
                     <i class="fas fa-eye"></i>
                   </a> &nbsp;
-                  <a th:href="@{~/fakultas/edit/{id}(id=${data.id})}" class="btn btn-xs btn-warning">
+                  <a th:href="@{~/jurusan/edit/{id}(id=${data.id})}" class="btn btn-xs btn-warning">
                     <i class="fas fa-edit"></i>
                   </a> &nbsp;
-                  <a th:href="@{~/fakultas/delete/{id}(id=${data.id})}" class="btn btn-xs btn-danger" onclick="return confirm('Kamu yakin akan delete akuuuuh?')">
+                  <a th:href="@{~/jurusan/delete/{id}(id=${data.id})}" class="btn btn-xs btn-danger" onclick="return confirm('Kamu yakin akan delete akuuuuh?')">
                     <i class="fas fa-trash"></i>
                   </a> &nbsp;
                 </td>
@@ -84,16 +81,35 @@
         </div>
       </div>
     </div>
+
+
+    <!-- modal -->
+    <div class="modal fade" id="modal-form">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
   </div>
-
   <script layout:fragment="client-script">
-    // event dari button di click
-    $("#btn-coba").on("click", function (){
-      alert("test button click");
-      console.log("On log info");
-
-      $("#table-data").hide();
-    });
+    $("#btn-add").on("click", function (e){
+      e.preventDefault();
+      var url = $(this).attr('href');
+      $.ajax({
+        url:url,
+        dataType: 'HTML',
+        method: 'GET',
+        success: function (result){
+          $('#modal-form').find('.modal-content').html(result);
+          $("#modal-form").modal('show');
+        }
+      })
+    })
   </script>
 </body>
 </html>
