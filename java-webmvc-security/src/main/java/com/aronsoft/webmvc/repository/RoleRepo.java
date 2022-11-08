@@ -16,9 +16,11 @@ import java.util.List;
 public interface RoleRepo extends JpaRepository<RoleEntity, String> {
     RoleEntity findByName(String name);
 
-    @Query("select t from RoleEntity t join fetch t.menus where t.name in :names")
+    //@Query("select t from RoleEntity t join fetch t.menus where t.name in :names")
+    @Query("select t from RoleEntity t where t.name in :names")
     List<RoleEntity> findByNamesFetchMenus(@Param("names") List<String> names);
 
-    @Query("select t from RoleEntity t join fetch t.menus join fetch t.privileges where t.id=:id")
+    //@Query("select t from RoleEntity t join fetch t.menus join fetch t.privileges where t.id=:id")
+    @Query("select t from RoleEntity t where t.id=:id")
     RoleEntity findByIdFetchMenuAndPrivilege(@Param("id") String id);
 }
