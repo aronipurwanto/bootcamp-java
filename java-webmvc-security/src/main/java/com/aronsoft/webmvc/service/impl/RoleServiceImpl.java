@@ -22,6 +22,11 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    public Long getCount() {
+        return this.repo.count();
+    }
+
+    @Override
     public List<RoleEntity> get() {
         List<RoleEntity> result = this.repo.findAll();
         if(result == null)

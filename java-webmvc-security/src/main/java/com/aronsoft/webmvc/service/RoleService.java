@@ -10,6 +10,7 @@ import java.util.List;
  * @since : 01/05/2021
  **/
 public interface RoleService {
+    public Long getCount();
     public List<RoleEntity> get();
     public List<RoleEntity> getByNames(List<String> names);
     public RoleEntity getByName(String name);

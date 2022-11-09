@@ -38,7 +38,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/login/**" ).anonymous()
-                .antMatchers("/plugins/**","/dist/**","/mst/lookup","/**").permitAll()
+                .antMatchers("/plugins/**","/dist/**","/mst/lookup").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").loginProcessingUrl("/login")

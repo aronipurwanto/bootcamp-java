@@ -2,18 +2,31 @@ package com.aronsoft.webmvc.config;
 
 import com.aronsoft.webmvc.entity.FakultasEntity;
 import com.aronsoft.webmvc.entity.JurusanEntity;
+import com.aronsoft.webmvc.entity.RoleEntity;
+import com.aronsoft.webmvc.entity.UserEntity;
 import com.aronsoft.webmvc.repository.FakultasRepo;
+import com.aronsoft.webmvc.service.RoleService;
+import com.aronsoft.webmvc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
 
 @Service
 public class DbInit implements CommandLineRunner {
     private FakultasRepo fakultasRepo;
+    private PasswordEncoder encoder;
+    private UserService userService;
+    private RoleService roleService;
 
     @Autowired
-    public DbInit(FakultasRepo fakultasRepo) {
+    public DbInit(FakultasRepo fakultasRepo, PasswordEncoder encoder, UserService userService, RoleService roleService) {
         this.fakultasRepo = fakultasRepo;
+        this.encoder = encoder;
+        this.userService = userService;
+        this.roleService = roleService;
     }
 
     private void initFakultas(){
@@ -36,8 +49,36 @@ public class DbInit implements CommandLineRunner {
         }
     }
 
+    private void initUserAndRole(){
+        if(roleService.getCount() == 0){
+            this.roleService.save(Arrays.asList(
+                    new RoleEntity("ROLE_ADMIN"),
+                    new RoleEntity("ROLE_USER"),
+                    new RoleEntity("ROLE_DOSEN"),
+                    new RoleEntity("ROLE_MAHASISWA"),
+                    new RoleEntity("ROLE_KEUANGAN")
+            ));
+        }
+
+        if(userService.getCount()==0){
+            RoleEntity adminRole = roleService.getByName("ROLE_ADMIN");
+            UserEntity admin = new UserEntity("admin", encoder.encode("admin32!"),"admin@gmail.com", Arrays.asList(adminRole));
+            this.userService.save(admin);
+
+            RoleEntity mhsRole = roleService.getByName("ROLE_MAHASISWA");
+            UserEntity mhs = new UserEntity("mahasiswa", encoder.encode("mahasiswa32!"),"mahasiswa@gmail.com", Arrays.asList(mhsRole));
+            this.userService.save(mhs);
+
+            RoleEntity dosenRole = roleService.getByName("ROLE_DOSEN");
+            UserEntity dosen = new UserEntity("dosen", encoder.encode("dosen32!"),"dosen@gmail.com", Arrays.asList(dosenRole));
+            this.userService.save(dosen);
+        }
+    }
+
     @Override
     public void run(String... args) throws Exception {
         initFakultas();
+        // panggil method generate role user
+        initUserAndRole();
     }
 }

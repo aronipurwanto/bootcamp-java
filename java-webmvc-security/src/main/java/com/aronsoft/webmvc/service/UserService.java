@@ -10,6 +10,7 @@ import java.util.List;
  * @since : 01/05/2021
  **/
 public interface UserService {
+    public Long getCount();
     public List<UserEntity> get();
     public List<UserModel> getDto();
     public List<UserModel> getDtoByKeyword(String keyword);

@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 @Controller
 @RequestMapping("/error")
-public class WebErrorController implements ErrorController {
+public class WebErrorController implements org.springframework.boot.web.servlet.error.ErrorController {
 
     @RequestMapping("")
     public ModelAndView handleError(HttpServletRequest request) {
