@@ -1,17 +1,19 @@
-<!doctype html>
-<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/main}">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/main}">
 <head>
-    <title>Test Main</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
 <div class="row mb-2" layout:fragment="breadcrumb">
     <div class="col-sm-6">
-        <h1 class="m-0">Dashboard</h1>
+        <h1 class="m-0">Jurusan</h1>
     </div><!-- /.col -->
     <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Dashboard</li>
+            <li class="breadcrumb-item active">Jurusan</li>
         </ol>
     </div><!-- /.col -->
 </div><!-- /.row -->
@@ -45,34 +47,6 @@
             </div>
         </div><!-- /.card -->
     </div>
-    <!-- /.col-md-6 -->
-    <div class="col-lg-6">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="m-0">Featured</h5>
-            </div>
-            <div class="card-body">
-                <h6 class="card-title">Special title treatment</h6>
-
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-        </div>
-
-        <div class="card card-primary card-outline">
-            <div class="card-header">
-                <h5 class="m-0">Featured</h5>
-                <p><i class="fa-solid fa-coffee fa-2xs"></i> When my six o’clock alarm buzzes, I require a pot of good java.</p>
-            </div>
-            <div class="card-body">
-                <h6 class="card-title">Special title treatment</h6>
-
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-        </div>
-    </div>
-    <!-- /.col-md-6 -->
 </div>
 </body>
 </html>
