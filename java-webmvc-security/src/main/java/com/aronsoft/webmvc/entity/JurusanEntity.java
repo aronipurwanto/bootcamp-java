@@ -54,7 +54,7 @@ public class JurusanEntity {
         this.name = model.getName();
 
         FakultasEntity fakultasEntity = new FakultasEntity();
-        fakultasEntity.setId(model.getFakultas().getId());
+        fakultasEntity.setId(model.getFakultasId());
         this.fakultas = fakultasEntity;
 
         this.createdAt=LocalDateTime.now();

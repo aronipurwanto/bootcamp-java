@@ -56,7 +56,7 @@ public class JurusanServiceImpl implements JurusanService {
         JurusanEntity data = result.get();
         data.setCode(request.getCode());
         data.setName(request.getName());
-        FakultasEntity fakultas = new FakultasEntity(request.getFakultas().getId());
+        FakultasEntity fakultas = new FakultasEntity(request.getFakultasId());
         data.setFakultas(fakultas);
 
         try{

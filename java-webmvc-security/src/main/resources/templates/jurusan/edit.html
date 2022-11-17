@@ -42,7 +42,7 @@
 
                     <div class="form-group">
                         <label for="fakultasId">Fakultas</label>
-                        <select id="fakultasId" name="fakultas.id" class="form-control">
+                        <select id="fakultasId" name="fakultasId" class="form-control">
                             <option value="">Select One</option>
                             <option th:each="option: ${fakultasList}" th:value="${option.id}" th:text="${option.name}"
                                 th:selected="${option.id == data.fakultas.id}">Select One</option>

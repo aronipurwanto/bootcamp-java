@@ -12,7 +12,7 @@ public class JurusanModel {
     private String code;
     private String name;
     private String fakultasId;
-    private FakultasModel fakultas;
+    private String fakultasName;
 
     public JurusanModel() {
     }
@@ -21,7 +21,7 @@ public class JurusanModel {
         BeanUtils.copyProperties(entity, this);
         if(entity.getFakultas() != null) {
             fakultasId = entity.getFakultas().getId();
-            fakultas = new FakultasModel(entity.getFakultas());
+            fakultasName = entity.getFakultas().getName();
         }
     }
 }

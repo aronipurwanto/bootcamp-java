@@ -22,5 +22,21 @@
                 <textarea  id="alamat" name="alamat" class="form-control" th:text="${data.alamat}" readonly="readonly" > </textarea>
             </div>
         </div>
+
+        <!-- table disini -->
+        <table class="table">
+            <thead>
+            <tr>
+                <td>Kode</td>
+                <td>Nama Jurusan</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="jurusan : ${data.jurusans}">
+                <td th:text="${jurusan.code}"></td>
+                <td th:text="${jurusan.name}"></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </form>

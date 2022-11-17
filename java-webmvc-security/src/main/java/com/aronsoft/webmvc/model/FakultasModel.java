@@ -1,10 +1,12 @@
 package com.aronsoft.webmvc.model;
 
 import com.aronsoft.webmvc.entity.FakultasEntity;
+import com.aronsoft.webmvc.entity.JurusanEntity;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.BeanUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -21,5 +23,11 @@ public class FakultasModel {
 
     public FakultasModel(FakultasEntity entity) {
         BeanUtils.copyProperties(entity, this);
+        if(entity.getJurusans() != null || !entity.getJurusans().isEmpty()){
+            jurusans = new ArrayList<>();
+            for(JurusanEntity jrs : entity.getJurusans()){
+                jurusans.add(new JurusanModel(jrs));
+            }
+        }
     }
 }
