@@ -50,7 +50,6 @@ public class SecurityConfig {
                 .rememberMe().key("uniqueAndSecret").tokenValiditySeconds(86400)
                 .and()
                 .csrf().disable();
-        //.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
         return http.build();
     }
