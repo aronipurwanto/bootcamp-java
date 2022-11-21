@@ -30,6 +30,9 @@ public class FakultasServiceImpl implements FakultasService {
 
     @Override
     public FakultasModel getById(String id) {
+        if(id == null || id.isEmpty()){
+            return new FakultasModel();
+        }
         return this.repo.findById(id).map(FakultasModel::new).orElse(new FakultasModel());
     }
 
