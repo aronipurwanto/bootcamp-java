@@ -53,6 +53,10 @@ public class FakultasServiceImpl implements FakultasService {
 
     @Override
     public Optional<FakultasModel> update(String id, FakultasModel request) {
+        if(id == null || id.isEmpty()){
+            return Optional.empty();
+        }
+
         Optional<FakultasEntity> result = this.repo.findById(id);
         if(result.isEmpty()) {
             return Optional.empty();
