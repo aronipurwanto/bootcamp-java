@@ -45,10 +45,22 @@ public class KelasServiceImpl implements KelasService {
         if(model == null)
             return Optional.empty();
         // check case 01
-        List<KelasEntity> check01 = this.repo.checkCase01(model.getRuangId(), model.getJamMulai(), model.getJamSelesai());
-        if(!check01.isEmpty() || check01 != null){
+        List<KelasEntity> check01 = this.repo.checkCase01(model.getRuangId(), model.getNamaHari(),
+                model.getJamMulai(), model.getJamSelesai());
+        if(check01 != null || !check01.isEmpty()){
             return Optional.empty();
         }
+
+        // check case 02
+        List<KelasEntity> check02 = this.repo.checkCase02();
+
+        // check case 03
+
+        // check case 04
+
+        // check case 05
+
+        // check case 06
 
         // save validate OK
         KelasEntity result = new KelasEntity(model);
