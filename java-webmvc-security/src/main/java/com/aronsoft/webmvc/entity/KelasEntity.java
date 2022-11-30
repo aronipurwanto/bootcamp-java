@@ -1,19 +1,23 @@
 package com.aronsoft.webmvc.entity;
 
+import com.aronsoft.webmvc.model.KelasModel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.beans.BeanUtils;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.UUID;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "kelas_tab")
+@NoArgsConstructor
+@AllArgsConstructor
 public class KelasEntity {
     @Id
     @Column(name = "id")
@@ -31,22 +35,34 @@ public class KelasEntity {
     @Column(name = "jam_selesai")
     private Date jamSelesai;
 
-    @Column(name = "ruang_id")
+    @Column(name = "ruang_id", length = 36, nullable = false)
     private String ruangId;
 
-    @Column(name = "matakuliah_id")
+    @ManyToOne
+    @JoinColumn(name = "ruang_id", insertable = false, updatable = false)
+    private RuangEntity ruang;
+
+    @Column(name = "matakuliah_id", length = 36, nullable = false)
     private String matakuliahId;
 
-    @Column(name = "dosen_id")
+    @ManyToOne
+    @JoinColumn(name = "matakuliah_id", insertable = false, updatable = false)
+    private MataKuliahEntity mataKuliah;
+
+    @Column(name = "dosen_id", length = 36)
     private String dosenId;
 
-    @Column(name = "status")
+    @ManyToOne
+    @JoinColumn(name = "dosen_id", insertable = false, updatable = false)
+    private DosenEntity dosen;
+
+    @Column(name = "status", length = 10)
     private String status;
 
     @Column(name = "tahun_ajaran")
     private Integer tahunAjaran;
 
-    @Column(name = "semester")
+    @Column(name = "semester", length = 10)
     private String semester;
 
     @Column(name = "quota")
@@ -66,4 +82,11 @@ public class KelasEntity {
 
     @Column(name = "updated_by", length = 20)
     private String updatedBy;
+
+    public KelasEntity(KelasModel model) {
+        BeanUtils.copyProperties(model, this);
+        this.id = UUID.randomUUID().toString();
+        this.createdAt=LocalDateTime.now();
+        this.createdBy="SYSTEM";
+    }
 }

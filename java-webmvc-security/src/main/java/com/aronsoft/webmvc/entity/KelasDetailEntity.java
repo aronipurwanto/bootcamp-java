@@ -3,10 +3,7 @@ package com.aronsoft.webmvc.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -18,12 +15,20 @@ public class KelasDetailEntity {
     @Column(name = "id")
     private String id;
 
-    @Column(name = "kelas_id")
+    @Column(name = "kelas_id", length = 36, nullable = false)
     private String kelasId;
 
-    @Column(name = "mahasiswa_id")
+    @ManyToOne
+    @JoinColumn(name = "kelas_id", insertable = false, updatable = false)
+    private KelasEntity kelas;
+
+    @Column(name = "mahasiswa_id", length = 36, nullable = false)
     private String mahasiswaId;
 
-    @Column(name = "status")
+    @ManyToOne
+    @JoinColumn(name = "mahasiswa_id", insertable = false, updatable = false)
+    private MahasiswaEntity mahasiswa;
+
+    @Column(name = "status", length = 20)
     private String status;
 }
