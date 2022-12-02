@@ -1,10 +1,8 @@
 package com.aronsoft.webmvc.config;
 
-import com.aronsoft.webmvc.entity.FakultasEntity;
-import com.aronsoft.webmvc.entity.JurusanEntity;
-import com.aronsoft.webmvc.entity.RoleEntity;
-import com.aronsoft.webmvc.entity.UserEntity;
+import com.aronsoft.webmvc.entity.*;
 import com.aronsoft.webmvc.repository.FakultasRepo;
+import com.aronsoft.webmvc.service.LookupService;
 import com.aronsoft.webmvc.service.RoleService;
 import com.aronsoft.webmvc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,17 +14,20 @@ import java.util.Arrays;
 
 @Service
 public class DbInit implements CommandLineRunner {
-    private FakultasRepo fakultasRepo;
-    private PasswordEncoder encoder;
-    private UserService userService;
-    private RoleService roleService;
+    private final FakultasRepo fakultasRepo;
+    private final PasswordEncoder encoder;
+    private final UserService userService;
+    private final RoleService roleService;
+    private final LookupService lookupService;
 
     @Autowired
-    public DbInit(FakultasRepo fakultasRepo, PasswordEncoder encoder, UserService userService, RoleService roleService) {
+    public DbInit(FakultasRepo fakultasRepo, PasswordEncoder encoder, UserService userService, RoleService roleService,
+                  LookupService lookupService) {
         this.fakultasRepo = fakultasRepo;
         this.encoder = encoder;
         this.userService = userService;
         this.roleService = roleService;
+        this.lookupService = lookupService;
     }
 
     private void initFakultas(){
@@ -75,10 +76,52 @@ public class DbInit implements CommandLineRunner {
         }
     }
 
+    private void initLookup(){
+        if(lookupService.getByGroup("HARI").isEmpty()){
+            lookupService.saveAll(Arrays.asList(
+                    new LookupEntity("HARI","SENIN","Senin",1),
+                    new LookupEntity("HARI","SELASA","Selasa",2),
+                    new LookupEntity("HARI","RABU","RABU",3),
+                    new LookupEntity("HARI","KAMIS","Kamis",4),
+                    new LookupEntity("HARI","JUMAT","Jumat",5),
+                    new LookupEntity("HARI","SABTU","Sabtu",6),
+                    new LookupEntity("HARI","MINGGU","Minggu",7)
+            ));
+        }
+
+        if(lookupService.getByGroup("SEMESTER").isEmpty()){
+            lookupService.saveAll(Arrays.asList(
+                    new LookupEntity("SEMESTER","GANJIL","Ganjil",1),
+                    new LookupEntity("SEMESTER","GANJIL","Genap",2)
+            ));
+        }
+
+        if(lookupService.getByGroup("GENDER").isEmpty()){
+            lookupService.saveAll(Arrays.asList(
+                    new LookupEntity("GENDER","PRIA","Pria",1),
+                    new LookupEntity("GENDER","WANITA","Wanita",2)
+            ));
+        }
+
+        if(lookupService.getByGroup("AGAMA").isEmpty()){
+            lookupService.saveAll(Arrays.asList(
+                    new LookupEntity("AGAMA","ISLAM","Islam",1),
+                    new LookupEntity("AGAMA","KRISTEN","Kristen",2),
+                    new LookupEntity("AGAMA","KATHOLIK","Katholik",3),
+                    new LookupEntity("AGAMA","HINDU","Hindu",4),
+                    new LookupEntity("AGAMA","BUDHA","Budha",5),
+                    new LookupEntity("AGAMA","KONGHUCHU","Konghuchu",6),
+                    new LookupEntity("AGAMA","LAINNYA","Lainnya",7)
+            ));
+        }
+    }
+
     @Override
     public void run(String... args) throws Exception {
         initFakultas();
         // panggil method generate role user
         initUserAndRole();
+
+        initLookup();
     }
 }

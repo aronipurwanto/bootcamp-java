@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -35,4 +36,13 @@ public class LookupEntity {
 
     @Column(name = "lookup_active", nullable = false)
     private Boolean active;
+
+    public LookupEntity(String groups, String code, String name, Integer position) {
+        this.groups = groups;
+        this.code = code;
+        this.name = name;
+        this.position = position;
+        this.id = UUID.randomUUID().toString();
+        this.active = true;
+    }
 }
