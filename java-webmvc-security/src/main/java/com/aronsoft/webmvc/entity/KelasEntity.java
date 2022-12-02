@@ -1,6 +1,7 @@
 package com.aronsoft.webmvc.entity;
 
 import com.aronsoft.webmvc.model.KelasModel;
+import com.aronsoft.webmvc.util.DateUtil;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -90,5 +91,17 @@ public class KelasEntity {
         this.id = UUID.randomUUID().toString();
         this.createdAt=LocalDateTime.now();
         this.createdBy="SYSTEM";
+    }
+
+    public KelasEntity(String kode, String namaHari, String jamMulai, String jamSelesai, String ruangId,
+                       String matakuliahId, String dosenId) {
+        this.id = UUID.randomUUID().toString();
+        this.kode = kode;
+        this.namaHari = namaHari;
+        this.jamMulai = DateUtil.getTime(jamMulai);
+        this.jamSelesai = DateUtil.getTime(jamSelesai);
+        this.ruangId = ruangId;
+        this.matakuliahId = matakuliahId;
+        this.dosenId = dosenId;
     }
 }
