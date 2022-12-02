@@ -41,6 +41,17 @@ public class FakultasServiceImpl implements FakultasService {
         if(request == null) {
             return Optional.empty();
         }
+        // check code
+        List<FakultasEntity> checkCode = this.repo.findByCode(request.getCode());
+        if(!checkCode.isEmpty()){
+            return Optional.empty();
+        }
+
+        // check name
+        List<FakultasEntity> checkName = this.repo.findByName(request.getName());
+        if(!checkName.isEmpty()){
+            return Optional.empty();
+        }
 
         FakultasEntity result = new FakultasEntity(request);
         try{

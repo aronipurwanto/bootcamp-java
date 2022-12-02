@@ -12,6 +12,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -76,9 +77,34 @@ class FakultasServiceImplTest {
     }
 
     @Test
-    void save() {
+    void save_Check_Code() {
+        FakultasModel request = new FakultasModel("FE","Fakultas Ekonomi","Yogya");
+        //check code
+        when(repo.findByCode(request.getCode())).thenReturn(Arrays.asList(fakultasEntityList.get(2)));
+
+        Optional<FakultasModel> result = service.save(request);
+        assertNotNull(result);
+        assertEquals(Optional.empty(), result);
+    }
+
+    @Test
+    void save_Check_Name() {
+        FakultasModel request = new FakultasModel("FE","Fakultas Ekonomi","Yogya");
+        // case kedua
+        when(repo.findByCode("FE")).thenReturn(Collections.emptyList());
+        when(repo.findByName("Fakultas Ekonomi")).thenReturn(Arrays.asList(fakultasEntityList.get(2)));
+
+        Optional<FakultasModel> result = service.save(request);
+        assertNotNull(result);
+        assertEquals(Optional.empty(), result);
+    }
+
+    @Test
+    void save_Check_CodeAndName_Valid() {
         FakultasModel request = new FakultasModel("FE","Fakultas Ekonomi","Yogya");
 
+        when(repo.findByCode("FE")).thenReturn(Collections.emptyList());
+        when(repo.findByName("Fakultas Ekonomi")).thenReturn(Collections.emptyList());
         //stubing atau mocking
         when(repo.save(any(FakultasEntity.class))).thenReturn(fakultasEntityList.get(2));
 

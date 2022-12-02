@@ -37,6 +37,16 @@ public class JurusanServiceImpl implements JurusanService {
             return Optional.empty();
         }
 
+        List<JurusanEntity> checkCode = this.repo.findByCode(request.getCode());
+        if(!checkCode.isEmpty()){
+            return Optional.empty();
+        }
+
+        List<JurusanEntity> checkName = this.repo.findByCode(request.getName());
+        if(!checkName.isEmpty()){
+            return Optional.empty();
+        }
+
         JurusanEntity result = new JurusanEntity(request);
         try{
             this.repo.save(result);

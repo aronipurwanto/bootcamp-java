@@ -23,15 +23,17 @@ public class KelasEntity {
     @Column(name = "id")
     private String id;
 
-    @Column(name = "kode")
+    @Column(name = "kode", length = 10)
     private String kode;
 
-    @Column(name = "hari")
+    @Column(name = "hari", length = 10)
     private String namaHari;
 
+    @Temporal(TemporalType.TIME)
     @Column(name = "jam_mulai")
     private Date jamMulai;
 
+    @Temporal(TemporalType.TIME)
     @Column(name = "jam_selesai")
     private Date jamSelesai;
 

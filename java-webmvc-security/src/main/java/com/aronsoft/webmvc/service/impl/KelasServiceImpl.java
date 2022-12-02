@@ -52,7 +52,7 @@ public class KelasServiceImpl implements KelasService {
         }
 
         // check case 02
-        List<KelasEntity> check02 = this.repo.checkCase02();
+        //List<KelasEntity> check02 = this.repo.checkCase02();
 
         // check case 03
 

@@ -69,6 +69,17 @@ public class JurusanEntity {
         this.createdBy="SYSTEM";
     }
 
+    public JurusanEntity(String code, String name, String fakultasId) {
+        this.code = code;
+        this.name = name;
+
+        FakultasEntity fakultasEntity = new FakultasEntity(fakultasId);
+        this.fakultas = fakultasEntity;
+
+        this.createdAt=LocalDateTime.now();
+        this.createdBy="SYSTEM";
+    }
+
     @PrePersist
     public void onCreated(){
         this.id = UUID.randomUUID().toString();
