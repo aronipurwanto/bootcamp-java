@@ -96,9 +96,11 @@ public class FakultasServiceImpl implements FakultasService {
 
         if(!fakultas.getJurusans().isEmpty()){
             fakultas.getJurusans().clear();
-        }
-        try{
             this.repo.save(fakultas);
+        }
+
+        try{
+            this.repo.delete(fakultas);
         }catch (Exception e){
             log.info("Delete is failed, error: {}", e.getMessage());
         }

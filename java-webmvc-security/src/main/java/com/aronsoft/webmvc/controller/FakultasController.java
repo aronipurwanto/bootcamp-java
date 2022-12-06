@@ -51,12 +51,12 @@ public class FakultasController {
     @PostMapping("/save")
     public ModelAndView save(@Valid @ModelAttribute("fakultas") FakultasModel request, BindingResult result){
         ModelAndView view = new ModelAndView("fakultas/form.html");
-        if(!service.validCode(request)){
+        if(Boolean.FALSE.equals(service.validCode(request))){
             ObjectError error = new ObjectError("invalidCode", "Code "+ request.getCode() +" Not valid");
             result.addError(error);
         }
 
-        if(!service.validName(request)){
+        if(Boolean.FALSE.equals(service.validName(request))){
             ObjectError error = new ObjectError("invalidName", "Name "+ request.getName() +" Not valid");
             result.addError(error);
         }
@@ -83,7 +83,13 @@ public class FakultasController {
     }
 
     @PostMapping("/update")
-    public ModelAndView update(@ModelAttribute FakultasModel request){
+    public ModelAndView update(@Valid @ModelAttribute("fakultas") FakultasModel request, BindingResult result){
+        if(result.hasErrors()){
+            ModelAndView view = new ModelAndView("fakultas/form.html");
+            view.addObject("fakultas", request);
+            return view;
+        }
+
         this.service.update(request.getId(), request);
         return new ModelAndView("redirect:/fakultas");
     }
@@ -98,5 +104,11 @@ public class FakultasController {
         ModelAndView view = new ModelAndView("fakultas/detail.html");
         view.addObject("data", fakultas);
         return view;
+    }
+
+    @GetMapping("/delete/{id}")
+    public ModelAndView delete(@PathVariable("id") String id){
+        this.service.delete(id);
+        return new ModelAndView("redirect:/fakultas");
     }
 }
