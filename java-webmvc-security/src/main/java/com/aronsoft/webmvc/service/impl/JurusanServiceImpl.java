@@ -32,6 +32,18 @@ public class JurusanServiceImpl implements JurusanService {
     }
 
     @Override
+    public Boolean validCode(JurusanModel request) {
+        List<JurusanEntity> checkCode = this.repo.findByCode(request.getCode());
+        return checkCode.isEmpty();
+    }
+
+    @Override
+    public Boolean validName(JurusanModel request) {
+        List<JurusanEntity> checkName = this.repo.findByCode(request.getName());
+        return checkName.isEmpty();
+    }
+
+    @Override
     public Optional<JurusanModel> save(JurusanModel request) {
         if(request == null) {
             return Optional.empty();

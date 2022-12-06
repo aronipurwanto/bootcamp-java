@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -52,13 +53,13 @@ public class FakultasController {
     public ModelAndView save(@Valid @ModelAttribute("fakultas") FakultasModel request, BindingResult result){
         ModelAndView view = new ModelAndView("fakultas/form.html");
         if(Boolean.FALSE.equals(service.validCode(request))){
-            ObjectError error = new ObjectError("invalidCode", "Code "+ request.getCode() +" Not valid");
-            result.addError(error);
+            FieldError fieldError = new FieldError("fakultas","code","Code "+ request.getCode() +" already exist");
+            result.addError(fieldError);
         }
 
         if(Boolean.FALSE.equals(service.validName(request))){
-            ObjectError error = new ObjectError("invalidName", "Name "+ request.getName() +" Not valid");
-            result.addError(error);
+            FieldError fieldError = new FieldError("fakultas","code","Name with "+ request.getName() +" already exist");
+            result.addError(fieldError);
         }
 
         if(result.hasErrors()){

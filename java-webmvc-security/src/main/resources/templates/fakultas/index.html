@@ -97,6 +97,7 @@
         method: 'GET',
         success: function (result){
           $('#modal-form').find('.modal-content').html(result);
+          $('#modal-form').find('.card-title').html("New Fakultas");
           $("#modal-form").modal('show');
         }
       })
@@ -112,6 +113,7 @@
         method: 'GET',
         success: function (result){
           $('#modal-form').find('.modal-content').html(result);
+          $('#modal-form').find('.card-title').html("Detail Fakultas");
           $("#modal-form").modal('show');
         }
       })
@@ -127,6 +129,7 @@
         method: 'GET',
         success: function (result){
           $('#modal-form').find('.modal-content').html(result);
+          $('#modal-form').find('.card-title').html("Edit Fakultas");
           $("#modal-form").modal('show');
         }
       })
