@@ -4,6 +4,7 @@ import com.aronsoft.webmvc.entity.KelasEntity;
 import com.aronsoft.webmvc.repository.KelasRepo;
 import com.aronsoft.webmvc.util.DateUtil;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -64,6 +65,7 @@ class KelasServiceImplTest {
         assertEquals(jamSelesai, result.get(0).getJamSelesai());
     }
 
+    @Disabled
     @Test
     void getAllModel() {
         LocalDateTime time = DateUtil.getLocalTime("08:00:00");

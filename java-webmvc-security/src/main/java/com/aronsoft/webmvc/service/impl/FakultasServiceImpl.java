@@ -29,6 +29,20 @@ public class FakultasServiceImpl implements FakultasService {
     }
 
     @Override
+    public Boolean validCode(FakultasModel model) {
+        // check code
+        List<FakultasEntity> checkCode = this.repo.findByCode(model.getCode());
+        return checkCode.isEmpty();
+    }
+
+    @Override
+    public Boolean validName(FakultasModel model) {
+        // check name
+        List<FakultasEntity> checkName = this.repo.findByName(model.getName());
+        return checkName.isEmpty();
+    }
+
+    @Override
     public FakultasModel getById(String id) {
         if(id == null || id.isEmpty()){
             return new FakultasModel();
@@ -39,17 +53,6 @@ public class FakultasServiceImpl implements FakultasService {
     @Override
     public Optional<FakultasModel> save(FakultasModel request) {
         if(request == null) {
-            return Optional.empty();
-        }
-        // check code
-        List<FakultasEntity> checkCode = this.repo.findByCode(request.getCode());
-        if(!checkCode.isEmpty()){
-            return Optional.empty();
-        }
-
-        // check name
-        List<FakultasEntity> checkName = this.repo.findByName(request.getName());
-        if(!checkName.isEmpty()){
             return Optional.empty();
         }
 

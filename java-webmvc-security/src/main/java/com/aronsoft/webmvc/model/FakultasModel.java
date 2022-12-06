@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.BeanUtils;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,8 +15,16 @@ import java.util.List;
 @Setter
 public class FakultasModel {
     private String id;
+    @NotBlank
+    @NotEmpty
     private String code;
+
+    @NotBlank
+    @NotEmpty
     private String name;
+
+    @NotBlank
+    @NotEmpty
     private String alamat;
     private List<JurusanModel> jurusans;
 

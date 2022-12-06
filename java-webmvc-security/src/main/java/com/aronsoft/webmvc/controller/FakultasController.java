@@ -6,9 +6,12 @@ import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
@@ -40,11 +43,29 @@ public class FakultasController {
 
     @GetMapping("/add")
     public ModelAndView add(){
-        return new ModelAndView("fakultas/form.html");
+        ModelAndView view = new ModelAndView("fakultas/form.html");
+        view.addObject("fakultas", new FakultasModel());
+        return view;
     }
 
     @PostMapping("/save")
-    public ModelAndView save(@ModelAttribute FakultasModel request){
+    public ModelAndView save(@Valid @ModelAttribute("fakultas") FakultasModel request, BindingResult result){
+        ModelAndView view = new ModelAndView("fakultas/form.html");
+        if(!service.validCode(request)){
+            ObjectError error = new ObjectError("invalidCode", "Code "+ request.getCode() +" Not valid");
+            result.addError(error);
+        }
+
+        if(!service.validName(request)){
+            ObjectError error = new ObjectError("invalidName", "Name "+ request.getName() +" Not valid");
+            result.addError(error);
+        }
+
+        if(result.hasErrors()){
+            view.addObject("fakultas", request);
+            return view;
+        }
+
         this.service.save(request);
         return new ModelAndView("redirect:/fakultas");
     }
