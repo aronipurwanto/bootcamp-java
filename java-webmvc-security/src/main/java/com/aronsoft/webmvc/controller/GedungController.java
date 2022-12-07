@@ -71,15 +71,15 @@ public class GedungController {
             return new ModelAndView("redirect:/gedung");
         }
 
-        ModelAndView view = new ModelAndView("pages/gedung/form.html");
-        view.addObject("data", item);
+        ModelAndView view = new ModelAndView("pages/gedung/edit.html");
+        view.addObject("gedung", item);
         return view;
     }
 
     @PostMapping("/update")
     public ModelAndView update(@Valid @ModelAttribute("gedung") GedungModel request, BindingResult result){
         if(result.hasErrors()){
-            ModelAndView view = new ModelAndView("pages/gedung/form.html");
+            ModelAndView view = new ModelAndView("pages/gedung/edit.html");
             view.addObject("gedung", request);
             return view;
         }

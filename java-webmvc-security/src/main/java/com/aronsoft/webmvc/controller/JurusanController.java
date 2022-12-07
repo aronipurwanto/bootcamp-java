@@ -72,8 +72,8 @@ public class JurusanController {
             return new ModelAndView("redirect:/jurusan");
         }
 
-        ModelAndView view = new ModelAndView("pages/jurusan/form.html");
-        view.addObject("data", item);
+        ModelAndView view = new ModelAndView("pages/jurusan/edit.html");
+        view.addObject("jurusan", item);
         view.addObject("fakultasList", fakultasService.get());
         return view;
     }
@@ -81,7 +81,7 @@ public class JurusanController {
     @PostMapping("/update")
     public ModelAndView update(@Valid @ModelAttribute("jurusan") JurusanModel request, BindingResult result){
         if(result.hasErrors()){
-            ModelAndView view = new ModelAndView("pages/jurusan/form.html");
+            ModelAndView view = new ModelAndView("pages/jurusan/edit.html");
             view.addObject("jurusan", request);
             return view;
         }

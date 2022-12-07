@@ -1,11 +1,14 @@
 <!-- card mulai -->
-<form th:action="@{~/jurusan/save}" id="form-input" method="post" th:object="${jurusan}">
+<form th:action="@{~/jurusan/update}" id="form-input" method="post" th:object="${jurusan}">
     <div class="card">
         <div class="card-header bg-warning">
             <h3 class="card-title">New Jurusan</h3>
         </div>
 
         <div class="card-body">
+            <!--id di hidden-->
+            <input type="hidden" id="id" th:field="*{id}">
+
             <div class="form-group">
                 <label for="code">Kode</label>
                 <input id="code" type="text" th:field="*{code}" th:class="${#fields.hasErrors('code')} ? 'form-control is-invalid': 'form-control'">

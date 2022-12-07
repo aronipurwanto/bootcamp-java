@@ -31,11 +31,7 @@ public class FakultasController {
         ModelAndView view = new ModelAndView("pages/fakultas/index.html");
         List<FakultasModel> result = service.get();
 
-        String[] array = new String[]{"B$u$i$ld", "$t$$h$e", "N$e$x$t", "E$$ra", "$$o$f$", "S$$of$t$wa$r$e", "De$$ve$l$op$me$n$t"};
-        String word = Arrays.asList(array).stream().map(x -> x.replace("$","").toUpperCase(Locale.ROOT))
-                .collect(Collectors.joining(" "));
         view.addObject("dataList", result);
-        view.addObject("word", word);
         return view;
     }
 
@@ -70,20 +66,20 @@ public class FakultasController {
 
     @GetMapping("/edit/{id}")
     public ModelAndView edit(@PathVariable("id") String id){
-        FakultasModel fakultas = this.service.getById(id);
-        if(fakultas == null){
+        FakultasModel item = this.service.getById(id);
+        if(item == null){
             return new ModelAndView("redirect:/fakultas");
         }
 
-        ModelAndView view = new ModelAndView("pages/fakultas/form.html");
-        view.addObject("data", fakultas);
+        ModelAndView view = new ModelAndView("pages/fakultas/edit.html");
+        view.addObject("fakultas", item);
         return view;
     }
 
     @PostMapping("/update")
     public ModelAndView update(@Valid @ModelAttribute("fakultas") FakultasModel request, BindingResult result){
         if(result.hasErrors()){
-            ModelAndView view = new ModelAndView("pages/fakultas/form.html");
+            ModelAndView view = new ModelAndView("pages/fakultas/edit.html");
             view.addObject("fakultas", request);
             return view;
         }
