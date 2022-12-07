@@ -20,8 +20,11 @@ public class KelasModel {
     private Date jamMulai;
     private Date jamSelesai;
     private String ruangId;
+    private String ruangName;
     private String matakuliahId;
+    private String matakuliahName;
     private String dosenId;
+    private String dosenName;
     private String status;
     private Integer tahunAjaran;
     private String semester;

@@ -5,6 +5,7 @@ import com.aronsoft.webmvc.repository.FakultasRepo;
 import com.aronsoft.webmvc.service.LookupService;
 import com.aronsoft.webmvc.service.RoleService;
 import com.aronsoft.webmvc.service.UserService;
+import com.aronsoft.webmvc.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -96,14 +97,14 @@ public class DbInit implements CommandLineRunner {
             ));
         }
 
-        if(lookupService.getByGroup("GENDER").isEmpty()){
+        if(lookupService.getByGroup(Constants.GENDER).isEmpty()){
             lookupService.saveAll(Arrays.asList(
                     new LookupEntity("GENDER","PRIA","Pria",1),
                     new LookupEntity("GENDER","WANITA","Wanita",2)
             ));
         }
 
-        if(lookupService.getByGroup("AGAMA").isEmpty()){
+        if(lookupService.getByGroup(Constants.AGAMA).isEmpty()){
             lookupService.saveAll(Arrays.asList(
                     new LookupEntity("AGAMA","ISLAM","Islam",1),
                     new LookupEntity("AGAMA","KRISTEN","Kristen",2),

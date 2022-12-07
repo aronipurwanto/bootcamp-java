@@ -88,7 +88,13 @@ public class KelasEntity {
 
     public KelasEntity(KelasModel model) {
         BeanUtils.copyProperties(model, this);
+        /*
         this.id = UUID.randomUUID().toString();
+        this.kode = model.getKode();
+        this.namaHari = model.getNamaHari();
+        this.jamMulai = model.getJamMulai();
+        this.jamSelesai = model.getJamSelesai();
+         */
         this.createdAt=LocalDateTime.now();
         this.createdBy="SYSTEM";
     }

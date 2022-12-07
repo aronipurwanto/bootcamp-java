@@ -134,14 +134,6 @@
       return;
     });
 
-    // event dari button di click
-    $("#btn-coba").on("click", function (){
-      alert("test button click");
-      console.log("On log info");
-
-      $("#table-data").hide();
-    });
-
     $('#modal-form').on('submit','#form-input', function (){
       $.ajax({
         url: $(this).attr('action'),
