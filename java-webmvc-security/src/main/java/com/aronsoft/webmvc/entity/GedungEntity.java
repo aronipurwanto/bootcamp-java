@@ -1,12 +1,16 @@
 package com.aronsoft.webmvc.entity;
 
+import com.aronsoft.webmvc.model.GedungModel;
+import com.fasterxml.jackson.databind.util.BeanUtil;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.BeanUtils;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -40,4 +44,11 @@ public class GedungEntity {
 
     @OneToMany(mappedBy = "gedung", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<RuangEntity> ruangan = new HashSet<>();
+
+    public GedungEntity(GedungModel model) {
+        BeanUtils.copyProperties(model, this);
+        this.id = UUID.randomUUID().toString();
+        this.createdAt = LocalDateTime.now();
+        this.createdBy = "SYSTEM";
+    }
 }

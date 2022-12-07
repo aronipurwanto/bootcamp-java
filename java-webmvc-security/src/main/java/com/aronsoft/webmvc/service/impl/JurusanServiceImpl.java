@@ -91,6 +91,16 @@ public class JurusanServiceImpl implements JurusanService {
 
     @Override
     public Optional<JurusanModel> delete(String id) {
-        return Optional.empty();
+        Optional<JurusanEntity> result = this.repo.findById(id);
+        if(result.isEmpty()) {
+            return Optional.empty();
+        }
+
+        try{
+            this.repo.delete(result.get());
+            return Optional.of(new JurusanModel(result.get()));
+        }catch (Exception e){
+            return Optional.empty();
+        }
     }
 }

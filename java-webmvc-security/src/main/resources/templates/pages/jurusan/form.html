@@ -22,7 +22,8 @@
                 <label for="fakultasId">Fakultas</label>
                 <select id="fakultasId" name="fakultasId" th:class="${#fields.hasErrors('fakultasId')} ? 'form-control is-invalid': 'form-control'">
                     <option value="">Select One</option>
-                    <option th:each="option: ${fakultasList}" th:value="${option.id}" th:text="${option.name}">Select One</option>
+                    <option th:each="option: ${fakultasList}" th:value="${option.id}" th:text="${option.name}"
+                            th:selected="${option.id == data.fakultas.id}">Select One</option>
                 </select>
                 <span th:if="${#fields.hasErrors('fakultasId')}" class="error invalid-feedback" th:errors="*{fakultasId}"></span>
             </div>

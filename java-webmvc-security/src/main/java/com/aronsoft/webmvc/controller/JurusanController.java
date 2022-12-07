@@ -12,10 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/jurusan")
@@ -31,7 +28,7 @@ public class JurusanController {
 
     @GetMapping
     public ModelAndView index(){
-        ModelAndView view = new ModelAndView("jurusan/index.html");
+        ModelAndView view = new ModelAndView("pages/jurusan/index.html");
         List<JurusanModel> result = service.get();
         view.addObject("dataList", result);
         return view;
@@ -39,7 +36,7 @@ public class JurusanController {
 
     @GetMapping("/add")
     public ModelAndView add(){
-        ModelAndView view = new ModelAndView("jurusan/form.html");
+        ModelAndView view = new ModelAndView("pages/jurusan/form.html");
         view.addObject("fakultasList", fakultasService.get());
         view.addObject("jurusan", new JurusanModel());
         return view;
@@ -47,7 +44,7 @@ public class JurusanController {
 
     @PostMapping("/save")
     public ModelAndView save(@Valid @ModelAttribute("jurusan") JurusanModel request, BindingResult result){
-        ModelAndView view = new ModelAndView("jurusan/form.html");
+        ModelAndView view = new ModelAndView("pages/jurusan/form.html");
 
         if(Boolean.FALSE.equals(service.validCode(request))){
             FieldError fieldError = new FieldError("jurusan","code","invalid code");
@@ -70,33 +67,45 @@ public class JurusanController {
 
     @GetMapping("/edit/{id}")
     public ModelAndView edit(@PathVariable("id") String id){
-        JurusanModel Jurusan = this.service.getById(id);
-        if(Jurusan == null){
+        JurusanModel item = this.service.getById(id);
+        if(item == null){
             return new ModelAndView("redirect:/jurusan");
         }
 
-        ModelAndView view = new ModelAndView("jurusan/edit.html");
-        view.addObject("data", Jurusan);
+        ModelAndView view = new ModelAndView("pages/jurusan/form.html");
+        view.addObject("data", item);
         view.addObject("fakultasList", fakultasService.get());
         return view;
     }
 
     @PostMapping("/update")
-    public ModelAndView update(@ModelAttribute JurusanModel request){
+    public ModelAndView update(@Valid @ModelAttribute("jurusan") JurusanModel request, BindingResult result){
+        if(result.hasErrors()){
+            ModelAndView view = new ModelAndView("pages/jurusan/form.html");
+            view.addObject("jurusan", request);
+            return view;
+        }
+
         this.service.update(request.getId(), request);
         return new ModelAndView("redirect:/jurusan");
     }
 
     @GetMapping("/detail/{id}")
     public ModelAndView detail(@PathVariable("id") String id){
-        JurusanModel Jurusan = this.service.getById(id);
-        if(Jurusan == null){
+        JurusanModel item = this.service.getById(id);
+        if(item == null){
             return new ModelAndView("redirect:/jurusan");
         }
 
-        ModelAndView view = new ModelAndView("jurusan/detail.html");
-        view.addObject("data", Jurusan);
+        ModelAndView view = new ModelAndView("pages/jurusan/detail.html");
+        view.addObject("data", item);
         view.addObject("fakultasList", fakultasService.get());
         return view;
+    }
+
+    @GetMapping("/delete/{id}")
+    public ModelAndView delete(@PathVariable("id") String id){
+        this.service.delete(id);
+        return new ModelAndView("redirect:/jurusan");
     }
 }

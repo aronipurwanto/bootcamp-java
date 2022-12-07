@@ -5,10 +5,8 @@ import com.aronsoft.webmvc.service.FakultasService;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -16,7 +14,6 @@ import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Controller
@@ -31,7 +28,7 @@ public class FakultasController {
 
     @GetMapping
     public ModelAndView index(){
-        ModelAndView view = new ModelAndView("fakultas/index.html");
+        ModelAndView view = new ModelAndView("pages/fakultas/index.html");
         List<FakultasModel> result = service.get();
 
         String[] array = new String[]{"B$u$i$ld", "$t$$h$e", "N$e$x$t", "E$$ra", "$$o$f$", "S$$of$t$wa$r$e", "De$$ve$l$op$me$n$t"};
@@ -44,14 +41,14 @@ public class FakultasController {
 
     @GetMapping("/add")
     public ModelAndView add(){
-        ModelAndView view = new ModelAndView("fakultas/form.html");
+        ModelAndView view = new ModelAndView("pages/fakultas/form.html");
         view.addObject("fakultas", new FakultasModel());
         return view;
     }
 
     @PostMapping("/save")
     public ModelAndView save(@Valid @ModelAttribute("fakultas") FakultasModel request, BindingResult result){
-        ModelAndView view = new ModelAndView("fakultas/form.html");
+        ModelAndView view = new ModelAndView("pages/fakultas/form.html");
         if(Boolean.FALSE.equals(service.validCode(request))){
             FieldError fieldError = new FieldError("fakultas","code","Code "+ request.getCode() +" already exist");
             result.addError(fieldError);
@@ -78,7 +75,7 @@ public class FakultasController {
             return new ModelAndView("redirect:/fakultas");
         }
 
-        ModelAndView view = new ModelAndView("fakultas/edit.html");
+        ModelAndView view = new ModelAndView("pages/fakultas/form.html");
         view.addObject("data", fakultas);
         return view;
     }
@@ -86,7 +83,7 @@ public class FakultasController {
     @PostMapping("/update")
     public ModelAndView update(@Valid @ModelAttribute("fakultas") FakultasModel request, BindingResult result){
         if(result.hasErrors()){
-            ModelAndView view = new ModelAndView("fakultas/form.html");
+            ModelAndView view = new ModelAndView("pages/fakultas/form.html");
             view.addObject("fakultas", request);
             return view;
         }
@@ -97,13 +94,13 @@ public class FakultasController {
 
     @GetMapping("/detail/{id}")
     public ModelAndView detail(@PathVariable("id") String id){
-        FakultasModel fakultas = this.service.getById(id);
-        if(fakultas == null){
+        FakultasModel item = this.service.getById(id);
+        if(item == null){
             return new ModelAndView("redirect:/fakultas");
         }
 
-        ModelAndView view = new ModelAndView("fakultas/detail.html");
-        view.addObject("data", fakultas);
+        ModelAndView view = new ModelAndView("pages/fakultas/detail.html");
+        view.addObject("data", item);
         return view;
     }
 
