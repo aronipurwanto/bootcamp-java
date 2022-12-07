@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.BeanUtils;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
@@ -24,17 +25,21 @@ public class GedungModel {
     @NotEmpty
     private String name;
 
+    @Min(value = 1, message = "The value must be not zero")
+    private Integer jmlLantai;
+
     @NotBlank
     @NotEmpty
-    private Integer jmlLantai;
+    private String alamat;
 
     public GedungModel() {
     }
 
-    public GedungModel(String code, String name, Integer jmlLantai) {
+    public GedungModel(String code, String name, Integer jmlLantai, String alamat) {
         this.code = code;
         this.name = name;
         this.jmlLantai = jmlLantai;
+        this.alamat = alamat;
     }
 
     public GedungModel(GedungEntity entity) {

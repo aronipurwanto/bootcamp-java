@@ -30,6 +30,9 @@ public class GedungEntity {
     @Column(name = "jml_lantai")
     private Integer jmlLantai;
 
+    @Column(name = "alamat", length = 225)
+    private String alamat;
+
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
