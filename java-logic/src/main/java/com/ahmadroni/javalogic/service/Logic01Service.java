@@ -1,15 +1,18 @@
 package com.ahmadroni.javalogic.service;
 
+import com.ahmadroni.javalogic.model.PalindromeRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class Logic01 {
+public class Logic01Service {
     public Map<Character, Integer> soal01(String param){
-        param.replace(" ","");
-        char[] params = param.toCharArray();
+        param = param.replace(" ","");
+        char[] params = param.toUpperCase().toCharArray();
+        Arrays.sort(params);
 
         Map<Character, Integer> result = new HashMap<>();
         for(char item: params){
@@ -17,5 +20,13 @@ public class Logic01 {
             result.put(item, value);
         }
         return result;
+    }
+
+
+    public PalindromeRequest soal02(PalindromeRequest param){
+        // word01 => Map
+        // word02 => Map
+        // if jumlah nya sama => PALINDROME
+        return null;
     }
 }
