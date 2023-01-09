@@ -29,4 +29,15 @@ public class Logic01Service {
         // if jumlah nya sama => PALINDROME
         return null;
     }
+
+    public Map<Integer, String> soal03(int n){
+        Map<Integer, String> result = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            if(i % 2 == 0)
+                result.put(i,"GENAP");
+            else
+                result.put(i,"GANJIL");
+        }
+        return result;
+    }
 }

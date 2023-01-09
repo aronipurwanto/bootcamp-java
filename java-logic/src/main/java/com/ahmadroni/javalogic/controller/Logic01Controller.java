@@ -29,4 +29,10 @@ public class Logic01Controller {
         PalindromeRequest result = logic01Service.soal02(request);
         return ResponseEntity.ok().body(result);
     }
+
+    @GetMapping("/soal03/{param}")
+    public ResponseEntity<Object> soal03(@PathVariable("param") Integer param){
+        Map<Integer, String> result = logic01Service.soal03(param);
+        return ResponseEntity.ok().body(result);
+    }
 }
